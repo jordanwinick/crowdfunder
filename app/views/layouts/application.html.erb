@@ -7,7 +7,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <% if flash[:notice] %>
+    <p class="flash notice"><%= flash[:notice] %></p>
+  <% elsif flash[:alert] %>
+    <p class="flash alert"><%= flash[:alert] %></p>
+  <% end %>
   <header>
+    <h1><%= link_to "CrowdFunder", root_url %></h1>
     <nav> 
       <% if current_user %>
         <%= link_to "Logout", :logout, method: :post %>
@@ -16,12 +22,11 @@
         <%= link_to "Login", :login %>
       <% end %>
     </nav>
-  <div>
-    <p id="notice"><%= flash[:notice] %></p>
-    <p id="alert"><%= flash[:alert] %></p>
-  </div>
   </header>
-<%= yield %>
-
+  <main>
+    <article>
+      <%= yield %>
+    </article>
+  </main>
 </body>
 </html>

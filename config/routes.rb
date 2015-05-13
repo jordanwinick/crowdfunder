@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   root 'projects#index'
   
   resources :users, :only => [:new, :create]
-  resources :projects, :only => [:index, :new, :create]
+  resources :projects
   resources :user_sessions, :only => [:new, :create, :destroy]
-  resources :rewards, :only => [:new, :create]
+  resources :rewards, :only => [:new, :create, :show]
   
   get 'login' => 'user_sessions#new', :as => :login
   post 'logout' => 'user_sessions#destroy', :as => :logout
