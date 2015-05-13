@@ -4,6 +4,11 @@ class ProjectsController < ApplicationController
     @projects = Project.all
   end
 
+  def show
+    @project = Project.find(params[:id])
+    @rewards = @project.rewards
+  end
+
   def new
     @project = Project.new
     @reward = Reward.new

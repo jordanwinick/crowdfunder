@@ -1,0 +1,20 @@
+<div class="project">
+  <%= @project.name %>
+  <%= @project.description %>
+  <%= @project.goal %>
+  <%= @project.start_date %>
+  <%= @project.end_date %>
+
+  <div class="rewards">
+    <% if @rewards %>
+      <div class="reward-card">
+        <% @rewards.each do |reward| %>
+          <%= reward.title %>
+          <%= reward.description %>
+          <%= reward.amount %>
+          <%= reward.backer_limit %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
