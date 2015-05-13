@@ -1,5 +1,7 @@
 <% @projects.each do |project| %>
-  <%= project.name %>
-  <%= project.description %>
-  <%= project.goal %>
+  <div class="project-card">
+    <h3><%= project.name %></h3>
+    <p><%= project.description %></p>
+    <p><%= project.goal %></p>
+  </div>
 <% end %>
