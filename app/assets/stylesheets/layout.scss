@@ -1,0 +1,53 @@
+body {
+  line-height: 1.5;
+}
+
+header, main, article, .project-card, .project, .project-info, .project-rewards, .rewards-card {
+  display: flex;
+  box-sizing: border-box;
+}
+
+.project-card, article, .project-info, .project-rewards, .rewards-card {
+  flex-direction: column;
+}
+
+.project-info {
+  align-items: center;
+  width: 70vw;
+}
+
+.project-rewards {
+  align-items: center;
+  width: 20vw;
+}
+
+.reward-card {
+  width: 20vw;
+  text-align: center;
+}
+
+article {
+  width: 90vw;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.project-card {
+  width: 60vw;
+  height: 10em;
+  margin-bottom: 2em;
+}
+
+header, .project {
+  justify-content: space-between;
+}
+
+header {
+  height: 3em;
+  align-items: center;
+  padding: 0 2em;
+}
+
+.project {
+  width: 90vw;
+}
