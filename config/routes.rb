@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   resources :users, :only => [:new, :create]
   resources :projects, :only => [:index, :new, :create]
   resources :user_sessions, :only => [:new, :create, :destroy]
-
+  resources :rewards, :only => [:new, :create]
+  
   get 'login' => 'user_sessions#new', :as => :login
   post 'logout' => 'user_sessions#destroy', :as => :logout
   
