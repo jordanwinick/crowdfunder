@@ -6,6 +6,11 @@
     <p>Project Start: <%= format_date(@project.start_date) %></p>
     <p>Project End: <%= format_date(@project.end_date) %></p>
     <p><%= time_in_days(@project.end_date) %> left</p>
+    <% if @project.funded? %>
+      <p>Project is funded!</p>
+    <% else %>
+      <p>We still have a ways to go!</p>
+    <% end %>
   </div>
   <div class="project-rewards">
     <h3>Rewards</h3>
@@ -26,8 +31,15 @@
 </div>
   <% if project_owner?(@project) %>
     <p>Amount Pledged: <%= @project.amount_pledged %></p>
+    <h3>Reward Pledges</h3>
+    <ul>
+      <% @project.rewards.each do |reward| %>
+        <li><%= reward.title %>: <%= reward.num_of_pledges %></li>
+      <% end %>
+    </ul>
     <p><%= link_to "Edit Project", edit_project_path(@project) %><p>
-    <% if project.deletable? %>
-      <p><%= link_to "Delete Project",  %>
+    <% if @project.deletable? %>
+      <p><%= link_to "Delete Project", project_path(@project), :method => :delete %>
+    <% end %>
   <% end %>
 <p><%= link_to "Return to projects", projects_path %><p>

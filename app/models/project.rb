@@ -9,7 +9,7 @@ class Project < ActiveRecord::Base
 
   accepts_nested_attributes_for :rewards, :reject_if => :all_blank, :allow_destroy => true
 
-  validates :title, :description, :amount, :backer_limit, :presence => true
+  validates :name, :description, :goal, :start_date, :end_date, :presence => true
 
   def expired?
     end_date < Time.now
@@ -31,6 +31,11 @@ class Project < ActiveRecord::Base
   def deletable?
     amount_pledged == 0
   end
+
+  def funded?
+    amount_pledged >= goal
+  end
+
 # link_to_if project.active?, project.name, project_path(project)
 
 end

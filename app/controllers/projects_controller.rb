@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
 
   def index
-    @projects = Project.all
+    @projects = Project.all.order(:end_date)
   end
 
   def show
@@ -34,6 +34,12 @@ class ProjectsController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    @project = Project.find(params[:id])
+    @project.destroy
+    redirect_to projects_url
   end
   
   private
