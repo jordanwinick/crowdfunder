@@ -11,6 +11,14 @@ header, main, article, .project-card, .project, .project-info, .project-rewards,
   flex-direction: column;
 }
 
+.project {
+  margin-top:2em;
+}
+
+main {
+  margin-top: 3em;
+}
+
 .project-info {
   align-items: center;
   width: 70vw;
@@ -36,7 +44,7 @@ article {
 .project-card {
   width: 60vw;
   height: 10em;
-  margin-bottom: 2em;
+  margin-top: 2em;
   text-align: center;
 }
 
@@ -45,6 +53,9 @@ header, .project {
 }
 
 header {
+  position: fixed;
+  top: 0;
+  width: 100vw;
   height: 3em;
   align-items: center;
   padding: 0 2em;
