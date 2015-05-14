@@ -9,6 +9,8 @@ class Project < ActiveRecord::Base
 
   accepts_nested_attributes_for :rewards, :reject_if => :all_blank, :allow_destroy => true
 
+  validates :title, :description, :amount, :backer_limit, :presence => true
+
   def expired?
     end_date < Time.now
   end
@@ -17,10 +19,18 @@ class Project < ActiveRecord::Base
     end_date >= Time.now
   end
 
-  # def time_left
-  #   from_time = Time.now
-  #   time_ago_in_words(from_time, end_date)
-  # end
+  def amount_pledged
+    total_pledges = pledges.where(project_id: id)
+    if total_pledges
+      total_pledges.sum(:amount)
+    else
+      0
+    end
+  end
+
+  def deletable?
+    amount_pledged == 0
+  end
 # link_to_if project.active?, project.name, project_path(project)
 
 end

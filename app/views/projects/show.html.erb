@@ -2,26 +2,32 @@
   <div class="project-info">
     <h3><%= @project.name %></h3>
     <p><%= @project.description %></p>
-    <p><%= @project.goal %></p>
-    <p><%= format_date(@project.start_date) %></p>
-    <p><%= format_date(@project.end_date) %></p>
+    <p>Goal: <%= @project.goal %></p>
+    <p>Project Start: <%= format_date(@project.start_date) %></p>
+    <p>Project End: <%= format_date(@project.end_date) %></p>
     <p><%= time_in_days(@project.end_date) %> left</p>
   </div>
   <div class="project-rewards">
     <h3>Rewards</h3>
     <% if @rewards %>
-      <div class="reward-card">
-        <% @rewards.each do |reward| %>
+      <% @rewards.each do |reward| %>
+        <div class="reward-card">
           <h4><%= reward.title %></h4>
           <p><%= reward.description %></p>
-          <p><%= reward.amount %></p>
-          <p><%= reward.backer_limit %></p>
-        <% end %>
-      </div>
+          <p>Pledge Amount: <%= reward.amount %></p>
+          <p>Max Backers: <%= reward.backer_limit %></p>
+          <% if current_user %>
+            <button>Pledge Now!</button>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>
   <% if project_owner?(@project) %>
-    <%= link_to "Edit Project", edit_project_path(@project) %>
+    <p>Amount Pledged: <%= @project.amount_pledged %></p>
+    <p><%= link_to "Edit Project", edit_project_path(@project) %><p>
+    <% if project.deletable? %>
+      <p><%= link_to "Delete Project",  %>
   <% end %>
-<%= link_to "Return to projects", projects_path %>
+<p><%= link_to "Return to projects", projects_path %><p>

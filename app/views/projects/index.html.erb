@@ -3,5 +3,6 @@
     <h3><%= link_to "#{project.name}", project_path(project) %></h3>
     <p><%= project.description %></p>
     <p><%= project.goal %></p>
+    <p><%= time_in_days(project.end_date)  %> left!</p>
   </div>
 <% end %>
