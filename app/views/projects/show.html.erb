@@ -17,7 +17,9 @@
           <p>Pledge Amount: <%= reward.amount %></p>
           <p>Max Backers: <%= reward.backer_limit %></p>
           <% if current_user %>
-            <button>Pledge Now!</button>
+            <%= form_for [reward, Pledge.new] do |f| %>
+              <%= f.submit %>
+            <% end %>
           <% end %>
         </div>
       <% end %>
@@ -27,7 +29,5 @@
   <% if project_owner?(@project) %>
     <p>Amount Pledged: <%= @project.amount_pledged %></p>
     <p><%= link_to "Edit Project", edit_project_path(@project) %><p>
-    <% if project.deletable? %>
-      <p><%= link_to "Delete Project",  %>
   <% end %>
 <p><%= link_to "Return to projects", projects_path %><p>

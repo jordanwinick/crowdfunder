@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   resources :users
   resources :projects
   resources :user_sessions, :only => [:new, :create, :destroy]
-  resources :rewards, :only => [:new, :create, :show]
+  resources :rewards, :only => [:new, :create, :show] do
+    resources :pledges, :only => [:new, :create]
+  end
   
   get 'login' => 'user_sessions#new', :as => :login
   post 'logout' => 'user_sessions#destroy', :as => :logout
