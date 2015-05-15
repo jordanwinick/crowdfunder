@@ -3,6 +3,7 @@ class Project < ActiveRecord::Base
   has_many :pledges
 
   belongs_to :user
+  belongs_to :category
 
   scope :expired, -> { where("end_date < ?", Time.now) }
   scope :active, -> { where("end_date >= ?", Time.now) }

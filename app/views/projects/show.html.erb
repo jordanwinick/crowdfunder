@@ -2,6 +2,7 @@
   <div class="project-info">
     <h3><%= @project.name %></h3>
     <p><%= @project.description %></p>
+    <p>Owned by: <%= @project.user.first_name %> <%= @project.user.last_name %></p>
     <p>Goal: <%= @project.goal %></p>
     <p>Project Start: <%= format_date(@project.start_date) %></p>
     <p>Project End: <%= format_date(@project.end_date) %></p>
@@ -11,6 +12,20 @@
     <% else %>
       <p>We still have a ways to go!</p>
     <% end %>
+    <% if project_owner?(@project) %>
+      <h4>Reward Pledges</h4>
+      <ul>
+        <% @project.rewards.each do |reward| %>
+          <li><%= reward.title %>: <%= reward.num_of_pledges %></li>
+        <% end %>
+      </ul>
+      <p>Total Amount Pledged: <%= @project.amount_pledged %></p>
+      <p><%= link_to "Edit Project", edit_project_path(@project) %><p>
+      <% if @project.deletable? %>
+        <p><%= link_to "Delete Project", project_path(@project), :method => :delete %>
+      <% end %>
+    <% end %>
+    <p class="projects-link"><%= link_to "Return to projects", projects_path %><p>
   </div>
   <div class="project-rewards">
     <h3>Rewards</h3>
@@ -29,17 +44,3 @@
     <% end %>
   </div>
 </div>
-  <% if project_owner?(@project) %>
-    <p>Amount Pledged: <%= @project.amount_pledged %></p>
-    <h3>Reward Pledges</h3>
-    <ul>
-      <% @project.rewards.each do |reward| %>
-        <li><%= reward.title %>: <%= reward.num_of_pledges %></li>
-      <% end %>
-    </ul>
-    <p><%= link_to "Edit Project", edit_project_path(@project) %><p>
-    <% if @project.deletable? %>
-      <p><%= link_to "Delete Project", project_path(@project), :method => :delete %>
-    <% end %>
-  <% end %>
-<p><%= link_to "Return to projects", projects_path %><p>
