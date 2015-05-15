@@ -1,0 +1,17 @@
+header {
+  a {
+    text-decoration: none;
+    text-shadow: 1px 1px 1px black;
+  };
+  h1 {
+    font-size: 2em;
+  };
+  nav {
+    a {
+      margin-left: 1em;
+    };
+  };
+
+  box-shadow: $box-shadow;
+
+}

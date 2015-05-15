@@ -1,10 +1,18 @@
 $background-color: #eee;
+$primary-color: hsl(27, 100%, 50%);
 
 body {
   background: $background-color;
 }
 
-.project-card, .reward-card {
+.project-card, .project {
   background: #fff;
+}
+
+header {
+  background: $primary-color;
+  a {
+    color: #fff;
+  }
 }
 
