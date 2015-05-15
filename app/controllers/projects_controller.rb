@@ -1,7 +1,13 @@
 class ProjectsController < ApplicationController
 
   def index
-    @projects = Project.all.order(:end_date)
+    @projects = if params[:search]
+      Project.where("LOWER(name) LIKE LOWER(?)", "%#{params[:search]}%")
+    else
+      Project.all
+    end
+
+    @projects = @projects.order('projects.end_date').page(params[:page])
   end
 
   def show
@@ -41,7 +47,7 @@ class ProjectsController < ApplicationController
     @project.destroy
     redirect_to projects_url
   end
-  
+
   private
   def project_params
     params.require(:project).permit(:name, :description, :goal, :start_date, :end_date, :rewards_attributes => [:id, :title, :description, :amount, :backer_limit, :_destroy])
