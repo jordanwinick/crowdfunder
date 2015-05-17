@@ -1,0 +1,11 @@
+<h4>Reward Pledges</h4>
+  <ul>
+    <% @project.rewards.each do |reward| %>
+      <li><%= reward.title %>: <%= reward.num_of_pledges %></li>
+    <% end %>
+  </ul>
+  <p>Total Amount Pledged: <%= @project.amount_pledged %></p>
+  <p><%= link_to "Edit Project", edit_project_path(@project) %><p>
+  <% if @project.deletable? %>
+    <p><%= link_to "Delete Project", project_path(@project), :method => :delete %>
+  <% end %>

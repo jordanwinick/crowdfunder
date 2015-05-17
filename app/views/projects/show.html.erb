@@ -13,17 +13,19 @@
       <p>We still have a ways to go!</p>
     <% end %>
     <% if project_owner?(@project) %>
-      <h4>Reward Pledges</h4>
-      <ul>
-        <% @project.rewards.each do |reward| %>
-          <li><%= reward.title %>: <%= reward.num_of_pledges %></li>
+      <div id="owner-info">
+        <h4>Reward Pledges</h4>
+        <ul>
+          <% @project.rewards.each do |reward| %>
+            <li><%= reward.title %>: <%= reward.num_of_pledges %></li>
+          <% end %>
+        </ul>
+        <p>Total Amount Pledged: <%= @project.amount_pledged %></p>
+        <p><%= link_to "Edit Project", edit_project_path(@project) %><p>
+        <% if @project.deletable? %>
+          <p><%= link_to "Delete Project", project_path(@project), :method => :delete %>
         <% end %>
-      </ul>
-      <p>Total Amount Pledged: <%= @project.amount_pledged %></p>
-      <p><%= link_to "Edit Project", edit_project_path(@project) %><p>
-      <% if @project.deletable? %>
-        <p><%= link_to "Delete Project", project_path(@project), :method => :delete %>
-      <% end %>
+      </div>
     <% end %>
     <p class="projects-link"><%= link_to "Return to projects", projects_path %><p>
   </div>
@@ -36,10 +38,12 @@
           <p><%= reward.description %></p>
           <p>Pledge Amount: <%= reward.amount %></p>
           <p>Max Backers: <%= reward.backer_limit %></p>
-          <% if current_user %>
-            <%= form_for [reward, Pledge.new] do |f| %>
-              <%= f.submit %>
+          <% if current_user && reward.avail_pledges? %>
+            <%= form_for [reward, @pledge] do |f| %>
+              <%= f.button "Pledge Now!", :class => 'btn btn-pledge' %>
             <% end %>
+          <% else %>
+            <p>Backer Limit Maxed Out</p>
           <% end %>
         </div>
       <% end %>

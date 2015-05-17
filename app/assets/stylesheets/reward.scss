@@ -4,6 +4,12 @@
   width: 12rem;
   height: 10rem;
   padding: 5px;
+  &:hover {
+    background: yellow;
+  };
+  &:active {
+    background: lightgreen;
+  };
 }
 
 .project-rewards {

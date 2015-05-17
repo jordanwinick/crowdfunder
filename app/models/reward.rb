@@ -10,4 +10,9 @@ class Reward < ActiveRecord::Base
       0
     end
   end
+
+  def avail_pledges?
+    num_of_pledges < backer_limit
+  end
+
 end

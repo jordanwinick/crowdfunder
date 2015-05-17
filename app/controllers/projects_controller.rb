@@ -15,6 +15,16 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @rewards = @project.rewards
+    @pledge = Pledge.new
+
+    respond_to do |format|
+      format.html do
+        if request.xhr?
+          render @project
+        end
+      end
+    end
+
   end
 
   def new
